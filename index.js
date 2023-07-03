@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+// const userRoutes = require("./routes/users");
+
+const cors = require("cors");
 
 dotenv.config();
 
@@ -20,12 +23,15 @@ mongoose
 
 // import routes
 const productRoutes = require("./routes/product");
+const authRoutes = require("./routes/auth");
 
 // Middleware
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
 // route middleware
 app.use("/api/products", productRoutes);
+app.use("/api", authRoutes);
+// app.use("/api/auth", authRoutes);
 
 app.listen(4000, () => console.log("server run on port 4000"));
